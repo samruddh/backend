@@ -1,3 +1,4 @@
+const { set } = require("mongoose");
 const Got = require("../models/got");
 const { where } = require("../models/got");
 
@@ -12,8 +13,9 @@ exports.list = (req, res)=>{
             for(let i=0; i<data.length; i++)
             {
                 a.push(data[i].location);
+                var uni=[...new Set(a)]
             }
-            res.json(a);
+            res.json(uni);
         }
     });
 }
@@ -47,7 +49,7 @@ exports.search = (req, res)=>{
         }
 
         Got.find(query)
-    .exec((err, data)=>{
+        .exec((err, data)=>{
         if(err){
             res.json(err);
         }
@@ -76,7 +78,7 @@ exports.search = (req, res)=>{
         }
 
         Got.find(query)
-    .exec((err, data)=>{
+        .exec((err, data)=>{
         if(err){
             res.json(err);
         }
